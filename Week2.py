@@ -1,5 +1,60 @@
 from abc import ABC, abstractmethod
 
+class ElevationMixin:
+    def grade_percentage(self):
+        '''
+               Function name: grade_percentage()
+               Developer Name: Emilio Palermo
+               Date: 11th August 2026
+
+               The function is used to calculate the average percentage slope of the trail
+
+               Parameters: Nothing
+               :return: A float number that indicates the average percentage slope
+
+        '''
+        distance_meters = self.distance.convert('km').magnitude * 1000
+        if distance_meters == 0:
+            return 0.0
+        return (self.elevation_gain_m / distance_meters) * 100
+
+class RatingMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._rating = None
+
+    def set_rating(self, stars):
+        '''Function
+        name: grade_percentage()
+        Developer
+        Name: Emilio Palermo
+        Date: 11th August 2026
+
+        The function is used to set and validate the rating of the trail
+
+        Parameters: Nothing
+        :return: Nothing
+        '''
+
+        if not (1 <= stars <= 5):
+            raise ValueError("Rating must be between 1 and 5.")
+        self._rating = stars
+
+    def get_rating(self):
+        '''
+        Function
+        name: grade_percentage()
+        Developer
+        Name: Emilio Palermo
+        Date: 11th August 2026
+
+        The function is used to return rating of the trail if the trail is properly rated
+
+        Parameters: Nothing
+        :return: a number that indicates the rating of the trail
+        '''
+        return self._rating if self._rating else 'Not rated'
+
 class Distance:
     def __init__(self, magnitude, unit):
         if magnitude < 0:
@@ -50,7 +105,11 @@ class Distance:
         converted_other=other.convert(self.unit)
         return self.magnitude<converted_other.magnitude
 
-class Trail:
+    def __gt__(self, other):
+        converted_other=other.convert(self.unit)
+        return self.magnitude>converted_other.magnitude
+
+class Trail(ABC):
     default_unit = 'km'
 
     def __init__(self,id,name,distance,elevation_gain_m,difficulty):
@@ -114,16 +173,38 @@ class DayHike(Trail):
 
     def estimated_time(self):
         '''
-        I assume an average pace of 4 Km/h and I assume that every 100 m of elevation gain are
-        equivalent to 1000 m of plane hiking
+        Function name: estimated_time()
+        Developer Name: Emilio Palermo
+        Date: 10th August 2026
+
+        Overrides Trail.estimated_time.
+
+        The function is used to calculate the estimated time of completion of the trial.
+        For the calculation, I assume an average pace of 4 Km/h and I assume that every 100 m
+        of elevation gain are equivalent to 1000 m of plane hiking
+
+        Parameters: Nothing
+        :return: A float number that indicates the estimated time
+
         '''
         return (self.distance.magnitude + (self.elevation_gain_m/100)/4)
 
     def summary(self):
-        print(f"The DayHike {self.name} Trial is {self.distance.magnitude:.2f} Km long."
-              f"The difficulty is {self._difficulty} and "
-              f"the estimated time to complete is {self.estimated_time()}"
-              )
+        '''
+                Function name: summary
+                Developer Name: Emilio Palermo
+                Date: 10th August 2026
+
+                Overrides Trail.summary.
+
+                The function is used to return a summary of the main information of the trial
+
+                Parameters: Nothing
+                :return: A string that indicates name, distance, difficulty and estimated time
+        '''
+        return (f"The {self.name} is {self.distance}. "
+                f"The difficulty is {self._difficulty} "
+                f"and the estimated time to complete is {self.estimated_time()}.")
 
 
 class BackpackingRoute(Trail):
@@ -132,21 +213,40 @@ class BackpackingRoute(Trail):
 
     def estimated_time(self):
         '''
+        Function name: estimated_time()
+        Developer Name: Emilio Palermo
+        Date: 10th August 2026
+
+        Overrides the parent class estimated_time method.
+
+        This function is used for calculating the estimated time.
+
         I assume an average pace of 3 Km/h due to the weight of the backpack.
-         I assume also that every 100 m of elevation gain are
-        equivalent to 1500 m of plane hiking
+        I assume also that every 100 m of elevation gain are equivalent to 1500 m of plane hiking
         '''
         return (self.distance.magnitude + ((self.elevation_gain_m*1.5)/100))/3
 
     def summary(self):
-        print(f"The BackpackingRoute {self.name} Trial is {self.distance.magnitude:.2f} Km long."
+        '''
+        Function name: summary()
+        Developer Name: Emilio Palermo
+        Date: 10th August 2026
+
+        Overrides the parent class summary method.
+
+        The function is used to return a summary of the main information of the trial
+
+        Parameters: Nothing
+        :return: A string that indicates name, distance, difficulty and estimated time
+        '''
+        return(f"The Backpacking Route {self.name} Trial is {self.distance.magnitude:.2f} Km long."
               f"The difficulty is {self._difficulty} and "
               f"the estimated time to complete is {self.estimated_time()}"
               )
 
 class TrailRun(Trail):
     def __init__(self,id,name,distance,elevation_gain_m,difficulty):
-        super.__init__(id,name,distance,elevation_gain_m,difficulty)
+        super().__init__(id,name,distance,elevation_gain_m,difficulty)
 
     def estimated_time(self):
         '''
@@ -157,22 +257,20 @@ class TrailRun(Trail):
         return (self.distance.magnitude + ((self.elevation_gain_m)/100))/8
 
     def summary(self):
-        print(f"The BackpackingRoute {self.name} Trial is {self.distance.magnitude:.2f} Km long."
+        return(f"The Trial Run {self.name} is {self.distance.magnitude:.2f} Km long."
               f"The difficulty is {self._difficulty} and "
               f"the estimated time to complete is {self.estimated_time()}"
               )
 
-class GuidedDayHaike(DayHike):
+class GuidedDayHike(ElevationMixin, RatingMixin, DayHike):
     def __init__(self,id,name,distance,elevation_gain_m,difficulty, guide_name):
         super().__init__(id,name,distance,elevation_gain_m,difficulty)
         self.guide_name = guide_name
 
     def summary(self):
-        print(f"The BackpackingRoute {self.name} Trial is {self.distance.magnitude:.2f} Km long."
-              f"The difficulty is {self._difficulty} and "
-              f"the estimated time to complete is {self.estimated_time()}. "
-              f"The Guide name is {self.guide_name}"
-              )
+        base_summary=super().summary()
+        rating_info=f"Rating: {self.get_rating()} stars." if self._rating else ""
+        return f"{base_summary}. The Guide name is {self.guide_name}.{rating_info}"
 
 
 class Itinerary():
@@ -187,16 +285,50 @@ class Itinerary():
             return Distance(0, 'km')
         else:
             new_unit = self.trials[0].distance.unit
-            total_distance = 0
+            total_distance = Distance(0,new_unit)
             for t in self.trials:
-                converted_dist = t.distance.convert(new_unit)
-                total_distance += converted_dist.magnitude
-        return Distance(total_distance, self.trials[0].distance.unit)
+                total_distance += t.distance
+        return total_distance
+
+class FakeTrail:
+    def __init__(self,name,hours):
+        self.name = name
+        self.hours = hours
+
+    def estimated_time(self):
+        return self.hours
 
 
 def main():
-    d1=GuidedDayHaike(1,'Bello',5,100,'easy','Aldo')
-    d1.summary()
+    #Print MRO for GuidedDayHike as a testing
+    print("MRO for GuidedDayHike:")
+
+    for cls in GuidedDayHike.__mro__:
+        print(cls.__name__)
+    print("-" * 30)
+
+    #Calculate the estimated time for different trials as a test
+    hike=DayHike(1,'Day Hike1',5,100,'easy')
+    backpack=BackpackingRoute(2,'Back Pack1',10,500,'hard')
+    fake=FakeTrail('Fake Trail',3.5)
+
+    mixed_trials=[hike,backpack,fake]
+
+    total_time=0
+
+    for trial in mixed_trials:
+        total_time+=trial.estimated_time()
+    print(f"Total time to complete is {total_time:.2f}")
+
+    #distance tests
+    print(f'The total distance of the mixed_trials is {hike.distance+backpack.distance}')
+    if(Distance(2,'km')+Distance(3,'km')==Distance(5,'km')):
+        print('The Distance test was successful')
+    else:
+        print('The Distance test was not successful')
+
+    #test invalid Trial is successful and gives TypeError
+
 
 
 
