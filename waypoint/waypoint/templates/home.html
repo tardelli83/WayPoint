@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Waypoint</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Welcome to Waypoint</h1>
+    <p>{{ greeting_message }}</p>
+</body>
+</html>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <input type="text" name="testo" placeholder="Prova form">
+    <button type="submit">Invia</button>
+</form>
