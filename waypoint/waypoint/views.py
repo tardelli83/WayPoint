@@ -18,7 +18,7 @@ def report_view(request):
         # Showing the thank you page with the reporter's name
         return render(request, 'thank_you.html', {'name': name})
 
-    # If the user simply opens the page -> GET method, show empty form
+    # If it is a GET request, show the empty form page
     return render(request, 'report.html')
 
 
@@ -28,3 +28,21 @@ def search_view(request):
 
     # Render the search template and pass the query into the context
     return render(request, 'search.html', {'query': query})
+
+
+def catalog_view(request):
+    # List of at least 6 trail dictionaries matching domain model attributes & Django requirements
+    trails = [
+        {'name': 'Greenway Trail', 'distance': 5.2, 'elevation_gain': 120.5, 'difficulty': 'easy', 'is_open': True},
+        {'name': 'Pine Ridge Loop', 'distance': 8.7, 'elevation_gain': 340.0, 'difficulty': 'moderate',
+         'is_open': True},
+        {'name': 'Summit Peak Climb', 'distance': 12.4, 'elevation_gain': 850.2, 'difficulty': 'hard',
+         'is_open': False},
+        {'name': 'River Bank Path', 'distance': 3.1, 'elevation_gain': 45.0, 'difficulty': 'easy', 'is_open': True},
+        {'name': 'Canyon Ridge', 'distance': 10.0, 'elevation_gain': 520.8, 'difficulty': 'hard', 'is_open': True},
+        {'name': 'Valley Woods Way', 'distance': 6.5, 'elevation_gain': 210.0, 'difficulty': 'moderate',
+         'is_open': False},
+    ]
+
+    context = {'trails': trails}
+    return render(request, 'catalog.html', context)

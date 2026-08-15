@@ -1,19 +1,20 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Trails - Waypoint</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+
+<!-- Page Title -->
+{% block title %}Search Trails - Waypoint{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
     <h1>Search Page</h1>
 
+    <!-- Search form -->
     <form method="GET" action="{% url 'search' %}">
         <input type="text" name="q" value="{{ query }}" placeholder="Search for a trail...">
         <button type="submit">Search</button>
     </form>
 
+    <!-- Search results feedback -->
     {% if query %}
         <p>You searched for: <strong>{{ query }}</strong></p>
     {% else %}
@@ -22,5 +23,4 @@
 
     <br>
     <a href="{% url 'home' %}">Back to Home</a>
-</body>
-</html>
+{% endblock %}
