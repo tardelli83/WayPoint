@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}WayPoint{% endblock %}</title>
+</head>
+<body>
+    <!-- Include the shared navigation bar -->
+    {% include "partials/navbar.html" %}
+
+    <!-- Dynamic content block for individual pages -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Include the shared footer -->
+    {% include "partials/footer.html" %}
+</body>
+</html>
