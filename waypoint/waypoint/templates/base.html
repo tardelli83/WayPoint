@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< Updated upstream
     <title>{% block title %}WayPoint{% endblock %}</title>
 </head>
 <body>
@@ -10,11 +11,33 @@
 
     <!-- Dynamic content block for individual pages -->
     <div class="content">
+=======
+    <title>{% block title %}Waypoint{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f9f9f9; color: #333; }
+        nav { background: #333; padding: 10px; margin-bottom: 20px; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        footer { margin-top: 40px; padding: 10px; text-align: center; font-size: 0.9em; color: #666; border-top: 1px solid #ddd; }
+        .container { background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    {% include "partials/navbar.html" %}
+
+    <div class="container">
+>>>>>>> Stashed changes
         {% block content %}
         {% endblock %}
     </div>
 
+<<<<<<< Updated upstream
     <!-- Include the shared footer -->
     {% include "partials/footer.html" %}
+=======
+    {% include "partials/footer.html" %}
+
+>>>>>>> Stashed changes
 </body>
 </html>

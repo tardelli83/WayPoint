@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
+<<<<<<< Updated upstream
 <!-- Page Title -->
 {% block title %}Trail Catalog - Waypoint{% endblock %}
 
 <!-- Main Content -->
+=======
+{% block title %}Trail Catalog - Waypoint{% endblock %}
+
+>>>>>>> Stashed changes
 {% block content %}
     <h1>Trail Catalog</h1>
     <p>Explore our available hiking and biking trails below.</p>
 
+<<<<<<< Updated upstream
     <table border="1" cellpadding="8">
+=======
+    <table style="border-collapse: collapse; width: 100%;" border="1" cellpadding="8">
+>>>>>>> Stashed changes
         <thead>
             <tr>
                 <th>#</th>
@@ -21,6 +30,7 @@
         <tbody>
             {% for trail in trails %}
                 <tr>
+<<<<<<< Updated upstream
                     <!-- WP-504: Automatic row numbering -->
                     <td>{{ forloop.counter }}</td>
                     <td>{{ trail.name }}</td>
@@ -34,6 +44,16 @@
                         {% if not trail.is_open %}
                             <span style="color: red; font-weight: bold;">CLOSED</span>
                         {% elif trail.difficulty == 'hard' %}
+=======
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ trail.name }}</td>
+                    <td>{{ trail.distance|floatformat:1 }}</td>
+                    <td>{{ trail.elevation|floatformat:1 }}</td>
+                    <td>
+                        {% if not trail.is_open %}
+                            <span style="color: red; font-weight: bold;">CLOSED</span>
+                        {% elif trail.difficulty == 'expert' %}
+>>>>>>> Stashed changes
                             <span style="color: darkorange; font-weight: bold;">HARD</span>
                         {% else %}
                             <span>{{ trail.difficulty|title }}</span>
