@@ -1,20 +1,26 @@
 from django.shortcuts import render
 
-def home_view(request):
-    # Welcoming Message
-    context = {'message': "Welcome to Waypoint, your trail website!"}
-    return render(request, 'home.html', context)
+def home(request):
+    """Render the homepage view."""
+    return render(request, 'home.html')
 
+def catalog(request):
+    """Render the trail catalog view with 6 trail dicts."""
+    trails = [
+        {'name': 'Greenway Trail', 'distance': 5.23, 'elevation': 120.0, 'difficulty': 'easy', 'is_open': True},
+        {'name': 'Ridgeback Loop', 'distance': 8.5, 'elevation': 340.5, 'difficulty': 'expert', 'is_open': True},
+        {'name': 'Riverbank Path', 'distance': 3.12, 'elevation': 45.0, 'difficulty': 'easy', 'is_open': False},
+        {'name': 'Pine Forest Way', 'distance': 6.4, 'elevation': 210.0, 'difficulty': 'medium', 'is_open': True},
+        {'name': 'Canyon Ridge', 'distance': 11.0, 'elevation': 550.0, 'difficulty': 'expert', 'is_open': True},
+        {'name': 'Meadow Walk', 'distance': 2.8, 'elevation': 30.0, 'difficulty': 'easy', 'is_open': True},
+    ]
+    return render(request, 'catalog.html', {'trails': trails})
 
-def report_view(request):
-    # If the user sent the form (clicking Submit) -> POST method
-    if request.method == 'POST':
-        # Reading the data sent through the form
-        name = request.POST.get('name', 'Ospite')
-        email = request.POST.get('email')
-        trail = request.POST.get('trail')
-        note = request.POST.get('note')
+def search(request):
+    """Render the search view."""
+    return render(request, 'search.html')
 
+<<<<<<< Updated upstream
         # Showing the thank you page with the reporter's name
         return render(request, 'thank_you.html', {'name': name})
 
@@ -46,3 +52,8 @@ def catalog_view(request):
 
     context = {'trails': trails}
     return render(request, 'catalog.html', context)
+=======
+def report(request):
+    """Render the report view."""
+    return render(request, 'report.html')
+>>>>>>> Stashed changes
