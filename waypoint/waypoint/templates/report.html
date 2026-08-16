@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 
-<<<<<<< Updated upstream
 <!-- Page Title -->
 {% block title %}Report a Trail - Waypoint{% endblock %}
 
 <!-- Main Content -->
 {% block content %}
     <h1>Report a Trail</h1>
+    <p>Submit or view trail status updates here.</p>
+
     <form method="POST" action="">
         {% csrf_token %}
         <label>Your Name:</label><br>
         <input type="text" name="name" required><br><br>
-        
+
         <label>Trail Note:</label><br>
         <textarea name="note" required></textarea><br><br>
-        
+
         <button type="submit">Submit Report</button>
     </form>
-=======
-{% block title %}Report - Waypoint{% endblock %}
-
-{% block content %}
-    <h1>Trail Report</h1>
-    <p>Submit or view trail status updates here.</p>
->>>>>>> Stashed changes
 {% endblock %}

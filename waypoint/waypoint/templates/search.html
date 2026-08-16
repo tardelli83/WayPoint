@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-<<<<<<< Updated upstream
 {% load static %}
 
 <!-- Page Title -->
@@ -7,7 +6,7 @@
 
 <!-- Main Content -->
 {% block content %}
-    <h1>Search Page</h1>
+    <h1>Search Trails</h1>
 
     <!-- Search form -->
     <form method="GET" action="{% url 'search' %}">
@@ -24,15 +23,4 @@
 
     <br>
     <a href="{% url 'home' %}">Back to Home</a>
-=======
-
-{% block title %}Search - Waypoint{% endblock %}
-
-{% block content %}
-    <h1>Search Trails</h1>
-    <form method="get">
-        <input type="text" name="q" placeholder="Search by name...">
-        <button type="submit">Search</button>
-    </form>
->>>>>>> Stashed changes
 {% endblock %}

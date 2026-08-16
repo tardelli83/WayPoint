@@ -2,16 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< Updated upstream
-    <title>{% block title %}WayPoint{% endblock %}</title>
-</head>
-<body>
-    <!-- Include the shared navigation bar -->
-    {% include "partials/navbar.html" %}
-
-    <!-- Dynamic content block for individual pages -->
-    <div class="content">
-=======
     <title>{% block title %}Waypoint{% endblock %}</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f9f9f9; color: #333; }
@@ -23,21 +13,16 @@
     </style>
 </head>
 <body>
-
+    <!-- Include the shared navigation bar -->
     {% include "partials/navbar.html" %}
 
+    <!-- Dynamic content block for individual pages -->
     <div class="container">
->>>>>>> Stashed changes
         {% block content %}
         {% endblock %}
     </div>
 
-<<<<<<< Updated upstream
     <!-- Include the shared footer -->
     {% include "partials/footer.html" %}
-=======
-    {% include "partials/footer.html" %}
-
->>>>>>> Stashed changes
 </body>
 </html>
