@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-<<<<<<< Updated upstream
 {% load static %}
 
 <!-- Page Title -->
@@ -8,20 +7,13 @@
 <!-- Main Content -->
 {% block content %}
     <h1>Welcome to Waypoint</h1>
+    <p>Your hiking and biking trail companion.</p>
     <p>{{ greeting_message }}</p>
 
     <!-- Test form section -->
     <form method="POST" action="">
         {% csrf_token %}
-        <input type="text" name="testo" placeholder="Prova form">
+        <input type="text" name="testo" placeholder="Test form">
         <button type="submit">Invia</button>
     </form>
-=======
-
-{% block title %}Home - Waypoint{% endblock %}
-
-{% block content %}
-    <h1>Welcome to Waypoint</h1>
-    <p>Your hiking and biking trail companion.</p>
->>>>>>> Stashed changes
 {% endblock %}
