@@ -13,6 +13,7 @@
             <tr>
                 <th>#</th>
                 <th>Trail Name</th>
+                <th>Park</th>
                 <th>Distance (km)</th>
                 <th>Elevation Gain (m)</th>
                 <th>Status / Difficulty</th>
@@ -24,6 +25,9 @@
                     <!-- WP-504: Automatic row numbering -->
                     <td>{{ forloop.counter }}</td>
                     <td>{{ trail.name }}</td>
+
+                    <!-- WP-704: Show the park name or nothing if the park is empty -->
+                    <td>{{ trail.park.name|default:"--" }}</td>
 
                     <!-- WP-505: Apply float formatting filter -->
                     <td>{{ trail.distance|floatformat:1 }}</td>
