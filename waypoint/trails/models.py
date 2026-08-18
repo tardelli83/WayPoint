@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 class Park(models.Model):
     name = models.CharField(max_length=100)
@@ -15,7 +16,11 @@ class Trail(models.Model):
     ]
 
     name = models.CharField(max_length=100)
-    distance_km = models.DecimalField(max_digits=5, decimal_places=2)
+    distance_km = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0)]
+    )
     elevation_gain = models.IntegerField()
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
     is_open = models.BooleanField(default=True)
