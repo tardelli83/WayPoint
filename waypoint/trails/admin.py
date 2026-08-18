@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Trail
+from .models import Trail, Park
 
-@admin.register(Trail)
-class TrailAdmin(admin.ModelAdmin):
-    list_display = ('name', 'distance_km', 'difficulty', 'is_open', 'added')
-    search_fields = ('name', 'difficulty')
+admin.site.register(Trail)
+admin.site.register(Park)
