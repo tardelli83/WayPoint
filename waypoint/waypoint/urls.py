@@ -4,9 +4,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('trails/', include('trails.urls')), # <--- Aggiungi questa riga
+    path('trails/', include('trails.urls')), 
     path('', views.home, name='home'),
     path('catalog/', views.catalog, name='catalog'),
     path('search/', views.search, name='search'),
-    path('report/', views.report, name='report'),
 ]
