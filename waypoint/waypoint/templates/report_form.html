@@ -8,10 +8,16 @@
     <h1>Report a Trail</h1>
     <p>Submit or view trail status updates here.</p>
 
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'report' %}">
         {% csrf_token %}
         <label>Your Name:</label><br>
         <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Trail Name:</label><br>
+        <input type="text" name="trail" required><br><br>
 
         <label>Trail Note:</label><br>
         <textarea name="note" required></textarea><br><br>

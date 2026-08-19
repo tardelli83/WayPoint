@@ -17,6 +17,17 @@
     <!-- Search results feedback -->
     {% if query %}
         <p>You searched for: <strong>{{ query }}</strong></p>
+
+        <!-- List of search results -->
+        {% if trails %}
+            <ul>
+            {% for trail in trails %}
+                <li><strong>{{ trail.name }}</strong> - {{ trail.distance_km }} km (Difficulty: {{ trail.difficulty }})</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No trails found matching this name.</p>
+        {% endif %}
     {% else %}
         <p>Enter a keyword to start searching.</p>
     {% endif %}

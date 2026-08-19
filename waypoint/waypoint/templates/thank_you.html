@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Thank You - Waypoint{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Thank you for your contribution, {{ name }}!</h2>
+    <p class="lead">Your trail report has been successfully recorded in the database.</p>
+    <a href="{% url 'trail_list' %}" class="btn btn-primary">Back to Trail List</a>
+</div>
+{% endblock %}

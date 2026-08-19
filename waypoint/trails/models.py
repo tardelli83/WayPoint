@@ -30,3 +30,12 @@ class Trail(models.Model):
 
     def __str__(self):
         return self.name
+class TrailReport(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    trail = models.CharField(max_length=100)
+    note = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Report di {self.name} su {self.trail}"
